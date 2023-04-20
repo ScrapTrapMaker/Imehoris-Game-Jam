@@ -1,9 +1,13 @@
-import { Scene1 } from './scene/scene1.js'
+import { Scene1 } from "./scene/scene1.js";
 
 let config = {
     type: Phaser.AUTO,
     width: window.innerWidth - 4,
     height: window.innerHeight - 4,
+    physics: {
+        default: "arcade",
+        arcade: { }
+    },
     scene: [Scene1]
 };
 

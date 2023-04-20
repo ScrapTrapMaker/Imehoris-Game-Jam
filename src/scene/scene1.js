@@ -1,3 +1,8 @@
+import { Player } from "/src/characters/player.js";
+
+let player;
+let ground;
+
 export class Scene1 extends Phaser.Scene {
     constructor() {
         super({key: "Scene1"})
@@ -5,12 +10,19 @@ export class Scene1 extends Phaser.Scene {
 
     preload() {
         this.load.image("player", "/assets/player.png");
+        this.load.image("ground", "/assets/ground.png");
     }
 
     create() {
-        this.add.image(window.innerWidth / 2, window.innerHeight / 2, "player");
-        this.add.text(window.innerWidth / 2 - 80, window.innerHeight / 2 - 50, "This is the player");
+        ground = this.physics.add.staticGroup();
+        ground.create(400, window.innerHeight - 50, "ground");
+
+        player = new Player(this, window.innerWidth / 2, window.innerHeight / 2);
+        player.platforms[0] = ground;
+        player.setGravityType("space");
     }
 
-    update() {}
+    update() {
+        player.playerUpdate();
+    }
 }
